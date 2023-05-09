@@ -1,8 +1,10 @@
 import { CompaniesService } from './companies.service';
 import { Controller, Get, Put, Post, Delete, Param, Body } from '@nestjs/common';
 import { Company } from './entities/company.entity';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 
 @Controller('companies')
+@ApiTags('Компании')
 export class CompaniesController {
     constructor(private readonly companiesService: CompaniesService) {}
 
@@ -21,6 +23,7 @@ export class CompaniesController {
         return this.companiesService.update(+id, updateCompany);
     }
 
+    @ApiOperation({ summary: 'Создание компании' })
     @Post()
     create(@Body() createCompany: Company) {
         return this.companiesService.create(createCompany);

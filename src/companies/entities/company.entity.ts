@@ -12,15 +12,15 @@ import {
 
 @Entity('companies') //указываем что это не просто клаcс, а сущность в рамках TypeOrm, в БД будет храниться как таблица
 export class Company {
-  @ApiProperty()
+  @ApiProperty({ example: '1', description: 'Уникальный идентификатор' })
   @PrimaryGeneratedColumn() //колонка - идентификатор, значение генерируется автоматически
   id: number;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'IKEA', description: 'Название компании' })
   @Column()
   name: string;
 
-  @ApiProperty()
+  @ApiProperty({ example: 'г. Москва', description: 'Адресс компании' })
   @Column()
   address: string;
 }

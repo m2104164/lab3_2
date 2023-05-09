@@ -1,9 +1,18 @@
 import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
+import * as basicAuth from 'express-basic-auth';
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
+    app.use(
+        basicAuth({
+            challenge: true,
+            users: {
+                'user': 'password',
+            },
+        }),
+    );
     await app.setGlobalPrefix('/api');
     const config = new DocumentBuilder()
         .setTitle('Education API')
